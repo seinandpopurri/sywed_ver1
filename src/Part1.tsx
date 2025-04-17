@@ -55,19 +55,8 @@ export default function Part1() {
         })}
       </div>
 
-      {/* 마지막 줄과 화살표 사이 여백 두 줄 */}
+      {/* 하단 여백 */}
       <div className="h-4" />
-      <div className="h-4" />
-
-      {/* 깜빡이는 아래 삼각형 */}
-      <motion.div
-        className="text-center animate-bounce text-xl text-gray-400"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: lines.length * 0.35 + 0.5 }}
-      >
-        <span className="inline-block">▼</span>
-      </motion.div>
     </div>
   );
 }

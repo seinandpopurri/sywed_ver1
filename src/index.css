@@ -19,6 +19,18 @@ body,
   scrollbar-width: none; /* Firefox */
 }
 
+/* 깜빡이는 삼각형 애니메이션 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0) translateX(-50%);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translateY(5px) translateX(-50%);
+  }
+}
+
 /* index.css */
 
 .no-select-btn {

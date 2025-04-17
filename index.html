@@ -3,8 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + Tailwind + TS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>홍세인 & 이영건의 결혼식</title>
+    <style>
+      html, body {
+        overscroll-behavior: none;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        overflow: hidden;
+      }
+      #root {
+        height: 100%;
+        width: 100%;
+        padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>

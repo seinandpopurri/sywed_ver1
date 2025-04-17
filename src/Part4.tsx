@@ -66,8 +66,12 @@ const people = [
   },
 ];
 
-export default function Part4() {
-  const [selected, setSelected] = useState(null);
+interface Part4Props {
+  paddingTop?: number;
+}
+
+export default function Part4({ paddingTop = 0 }: Part4Props) {
+  const [selected, setSelected] = useState<any>(null);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -75,7 +79,10 @@ export default function Part4() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-green-200 flex flex-col items-center justify-center p-6 space-y-6 relative text-sm">
+    <div 
+      className="w-full h-full bg-green-200 flex flex-col items-center justify-center p-6 space-y-6 relative text-sm"
+      style={{ paddingTop: paddingTop ? `${paddingTop}px` : undefined }}
+    >
       {/* 부모 세대 */}
       <div className="flex flex-col items-center space-y-2">
         <div className="flex justify-center gap-4 items-center">

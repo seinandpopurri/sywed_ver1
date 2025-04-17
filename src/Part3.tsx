@@ -1,12 +1,21 @@
 import { i } from "framer-motion/m";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, RefObject } from "react";
 
 const GRID_WIDTH = 11;
 const GRID_HEIGHT = 60;
 const TILE_SIZE = 36;
 
+// 첫 번째 사진의 Y 위치
+const FIRST_PHOTO_Y = 3;
+// 마지막 사진의 Y 위치
+const LAST_PHOTO_Y = 48;
+// 마지막 사진의 높이
+const PHOTO_HEIGHT = 4;
+// 여백을 확장할 추가 공간
+const EXTRA_BOTTOM_SPACE = FIRST_PHOTO_Y;
+
 const photos = [
-  { id: "left-0", side: "left", x: 1, y: 3, message: "도쿄에서" },
+  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "도쿄에서" },
   { id: "left-1", side: "left", x: 1, y: 8, message: "따뜻한 날씨" },
   { id: "left-2", side: "left", x: 1, y: 13, message: "산책 중 한 컷" },
   { id: "left-3", side: "left", x: 1, y: 18, message: "꽃 피던 날" },
@@ -15,8 +24,8 @@ const photos = [
   { id: "left-6", side: "left", x: 1, y: 33, message: "저녁 노을" },
   { id: "left-7", side: "left", x: 1, y: 38, message: "길고양이랑 🐾" },
   { id: "left-8", side: "left", x: 1, y: 43, message: "벚꽃 아래에서" },
-  { id: "left-9", side: "left", x: 1, y: 48, message: "첫 여행 기억" },
-  { id: "right-0", side: "right", x: 7, y: 3, message: "눈 오는 날" },
+  { id: "left-9", side: "left", x: 1, y: LAST_PHOTO_Y, message: "첫 여행 기억" },
+  { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "눈 오는 날" },
   { id: "right-1", side: "right", x: 7, y: 8, message: "우산 속 우리" },
   { id: "right-2", side: "right", x: 7, y: 13, message: "한강에서" },
   { id: "right-3", side: "right", x: 7, y: 18, message: "일요일 오전" },
@@ -25,10 +34,14 @@ const photos = [
   { id: "right-6", side: "right", x: 7, y: 33, message: "바닷가에서 🌊" },
   { id: "right-7", side: "right", x: 7, y: 38, message: "빵집 앞에서" },
   { id: "right-8", side: "right", x: 7, y: 43, message: "기차 타기 전" },
-  { id: "right-9", side: "right", x: 7, y: 48, message: "조용한 오후" },
+  { id: "right-9", side: "right", x: 7, y: LAST_PHOTO_Y, message: "조용한 오후" },
 ];
 
-export default function Part3({ scrollContainerRef }) {
+interface Part3Props {
+  scrollContainerRef: RefObject<HTMLDivElement | null>;
+}
+
+export default function Part3({ scrollContainerRef }: Part3Props) {
   const [position, setPosition] = useState({ x: 5, y: 3 });
   const [showHint, setShowHint] = useState(false);
   const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
@@ -40,7 +53,7 @@ export default function Part3({ scrollContainerRef }) {
     setPosition((prev) => {
       const next = { ...prev };
       if (dir === "up") next.y = Math.max(prev.y - 1, 0);
-      if (dir === "down") next.y = Math.min(prev.y + 1, 51);
+      if (dir === "down") next.y = Math.min(prev.y + 1, LAST_PHOTO_Y + PHOTO_HEIGHT + 1); // 마지막 사진 아래 한 칸까지
       if (dir === "left") next.x = Math.max(prev.x - 1, 4);
       if (dir === "right") next.x = Math.min(prev.x + 1, 6);
 
@@ -82,9 +95,17 @@ export default function Part3({ scrollContainerRef }) {
       const targetScrollTop =
         container.scrollTop + offset - container.clientHeight / 2 + TILE_SIZE;
       const maxScrollTop = container.scrollHeight - container.clientHeight;
+      
+      const part3Section = container.querySelectorAll('section')[2];
+      const part3Bottom = part3Section.offsetTop + part3Section.offsetHeight;
+      const safeScrollTop = Math.min(
+        targetScrollTop, 
+        part3Bottom - container.clientHeight * 0.9,
+        maxScrollTop - 1
+      );
 
       container.scrollTo({
-        top: Math.min(targetScrollTop, maxScrollTop - 1),
+        top: safeScrollTop,
         behavior: "smooth",
       });
     }
@@ -116,8 +137,9 @@ export default function Part3({ scrollContainerRef }) {
       className="relative bg-pink-200"
       style={{
         width: `${GRID_WIDTH * TILE_SIZE}px`,
-        height: `${GRID_HEIGHT * TILE_SIZE}px`,
+        height: `${(LAST_PHOTO_Y + PHOTO_HEIGHT + EXTRA_BOTTOM_SPACE) * TILE_SIZE}px`,
         margin: "0 auto",
+        paddingTop: `${FIRST_PHOTO_Y * TILE_SIZE}px`,
         imageRendering: "pixelated",
       }}
     >

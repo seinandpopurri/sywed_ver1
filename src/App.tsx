@@ -13,32 +13,53 @@ export default function App() {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // 페이지 로드 시 맨 위로 스크롤
     scrollRef.current?.scrollTo({ top: 0 });
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = scrollRef.current?.scrollTop ?? 0;
-      const screenHeight = scrollRef.current?.offsetHeight ?? 0;
-      setShowHeader(scrollTop >= screenHeight * 0.9);
+      if (!scrollRef.current) return;
+      
+      const scrollTop = scrollRef.current.scrollTop;
+      const screenHeight = scrollRef.current.offsetHeight;
+      
+      // 헤더 표시 여부 설정
+      setShowHeader(scrollTop >= screenHeight * 0.5);
 
-      const sectionElements =
-        scrollRef.current?.querySelectorAll("section") ?? [];
+      // 파트3 감지 및 방향 패드 표시 여부 설정
+      const sectionElements = scrollRef.current.querySelectorAll("section");
       const part3Section = sectionElements[2];
-
-      if (part3Section && scrollRef.current) {
+      
+      if (part3Section) {
         const part3Rect = part3Section.getBoundingClientRect();
         const containerRect = scrollRef.current.getBoundingClientRect();
-        const isPart3InView =
-          part3Rect.bottom > containerRect.top &&
-          part3Rect.top < containerRect.bottom;
-        setShowDirectionPad(isPart3InView);
+        
+        // 파트3이 화면에 보이는지 확인
+        const part3Top = part3Rect.top - containerRect.top;
+        const part3Bottom = part3Rect.bottom - containerRect.top;
+        const viewportHeight = containerRect.height;
+        
+        // 파트3이 화면의 50% 이상을 차지할 때만 컨트롤러 표시
+        const isPart3Visible = 
+          part3Top < viewportHeight / 2 && 
+          part3Bottom > viewportHeight / 2 &&
+          Math.min(part3Bottom, viewportHeight) - Math.max(part3Top, 0) > viewportHeight * 0.5;
+        
+        setShowDirectionPad(isPart3Visible);
       }
     };
 
     const ref = scrollRef.current;
-    ref?.addEventListener("scroll", handleScroll);
-    return () => ref?.removeEventListener("scroll", handleScroll);
+    if (ref) {
+      ref.addEventListener("scroll", handleScroll);
+    }
+    
+    return () => {
+      if (ref) {
+        ref.removeEventListener("scroll", handleScroll);
+      }
+    };
   }, []);
 
   const startMoving = (dir: string) => {
@@ -50,7 +71,7 @@ export default function App() {
 
   const stopMoving = () => {
     if (intervalRef.current) {
-      clearInterval(intervalRef.current);
+      clearInterval(intervalRef.current as unknown as number);
       intervalRef.current = null;
     }
   };
@@ -59,46 +80,55 @@ export default function App() {
     <div className="w-screen h-screen bg-sky-100 flex justify-center items-center relative">
       {showDirectionPad && (
         <div
-          className="absolute z-50 bottom-[120px] lg:bottom-[60px]"
+          className="absolute z-50 bottom-[150px] lg:bottom-[180px]"
           style={{
-            width: "96px",
-            height: "96px",
+            width: "110px",
+            height: "110px",
             left: "50%",
             transform: "translateX(-50%)",
           }}
         >
-          <div className="relative w-full h-full rounded-full bg-white shadow-md flex items-center justify-center">
+          <div className="relative w-full h-full rounded-full bg-white/90 shadow-lg flex items-center justify-center backdrop-blur-sm border-2 border-pink-300">
+            {/* 방향키 버튼들 */}
             {[
               {
                 dir: "up",
+                icon: "↑",
                 style: {
                   top: "8px",
                   left: "50%",
                   transform: "translateX(-50%)",
+                  borderRadius: "40%",
                 },
               },
               {
                 dir: "down",
+                icon: "↓",
                 style: {
                   bottom: "8px",
                   left: "50%",
                   transform: "translateX(-50%)",
+                  borderRadius: "40%",
                 },
               },
               {
                 dir: "left",
+                icon: "←",
                 style: {
                   top: "50%",
                   left: "8px",
                   transform: "translateY(-50%)",
+                  borderRadius: "40%",
                 },
               },
               {
                 dir: "right",
+                icon: "→",
                 style: {
                   top: "50%",
                   right: "8px",
                   transform: "translateY(-50%)",
+                  borderRadius: "40%",
                 },
               },
             ].map((btn, i) => (
@@ -114,29 +144,51 @@ export default function App() {
                 tabIndex={-1}
                 style={{
                   position: "absolute",
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "#e5e7eb",
-                  borderRadius: "9999px",
+                  width: "32px",
+                  height: "32px",
+                  backgroundColor: "#f9d2e7",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  transition: "background-color 0.2s",
+                  transition: "all 0.2s",
+                  border: "1px solid #f9a8d4",
+                  color: "#be185d",
+                  fontSize: "16px",
+                  fontWeight: "bold",
+                  boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                   ...btn.style,
                 }}
                 onTouchStart={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f9a8d4";
+                  e.currentTarget.style.backgroundColor = "#f472b6";
+                  const transform = btn.dir === "up" || btn.dir === "down"
+                    ? "translateX(-50%) scale(0.95)"
+                    : "translateY(-50%) scale(0.95)";
+                  e.currentTarget.style.transform = transform;
                 }}
                 onTouchEnd={(e) => {
-                  e.currentTarget.style.backgroundColor = "#e5e7eb";
+                  e.currentTarget.style.backgroundColor = "#f9d2e7";
+                  const transform = btn.dir === "up" || btn.dir === "down"
+                    ? "translateX(-50%)"
+                    : "translateY(-50%)";
+                  e.currentTarget.style.transform = transform;
                 }}
                 onMouseDown={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f9a8d4";
+                  e.currentTarget.style.backgroundColor = "#f472b6";
+                  const transform = btn.dir === "up" || btn.dir === "down"
+                    ? "translateX(-50%) scale(0.95)"
+                    : "translateY(-50%) scale(0.95)";
+                  e.currentTarget.style.transform = transform;
                 }}
                 onMouseUp={(e) => {
-                  e.currentTarget.style.backgroundColor = "#e5e7eb";
+                  e.currentTarget.style.backgroundColor = "#f9d2e7";
+                  const transform = btn.dir === "up" || btn.dir === "down"
+                    ? "translateX(-50%)"
+                    : "translateY(-50%)";
+                  e.currentTarget.style.transform = transform;
                 }}
-              />
+              >
+                {btn.icon}
+              </button>
             ))}
           </div>
         </div>
@@ -144,12 +196,14 @@ export default function App() {
 
       <div
         className="relative overflow-hidden shadow-xl rounded-xl"
-        style={{ width: "393px", height: "852px" }}
+        style={{ width: "393px", height: "852px", maxHeight: "100vh" }}
       >
         {showHeader && (
           <div
-            className="absolute top-0 left-0 w-full bg-white/60 text-center py-2 z-10"
-            style={{ width: "100%", maxWidth: "393px" }}
+            className="absolute top-0 left-0 w-full bg-white/80 text-center py-2 z-50 backdrop-blur-sm"
+            style={{ 
+              paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)"
+            }}
           >
             <p className="text-xs">
               2025. 6. 8. (Sun) 2:00 p.m.{" "}
@@ -168,27 +222,35 @@ export default function App() {
 
         <div
           ref={scrollRef}
-          className="h-full w-full overflow-y-scroll overflow-x-hidden snap-y snap-mandatory scroll-smooth hide-scrollbar"
-          style={{ touchAction: "pan-y", overscrollBehavior: "contain" }}
+          className="h-full w-full overflow-y-auto overflow-x-hidden hide-scrollbar"
+          style={{ 
+            touchAction: "pan-y", 
+            overscrollBehavior: "contain",
+            scrollBehavior: "smooth" 
+          }}
         >
-          <section className="h-full snap-start">
+          <section className="h-full">
             <Part1 />
           </section>
-          <section className="h-full snap-start">
+          <section className="h-full">
             <Part2 />
           </section>
           <section
-            className="snap-start bg-pink-200"
-            style={{ height: `${36 * 55}px` }} // ✅ 높이 줄임
+            className="bg-pink-200"
+            style={{ 
+              height: `${(48 + 4 + 3) * 36}px`, // LAST_PHOTO_Y + PHOTO_HEIGHT + EXTRA_BOTTOM_SPACE * TILE_SIZE
+              paddingBottom: "20px",
+              marginBottom: "-20px"
+            }}
           >
             <Part3 scrollContainerRef={scrollRef} />
           </section>
 
-          <section className="h-full snap-start bg-green-200">
-            <Part4 paddingTop={100} />
+          <section className="h-full overflow-hidden">
+            <Part4 paddingTop={20} />
           </section>
 
-          <section className="h-full snap-start">
+          <section className="h-full bg-white">
             <Part5 />
           </section>
         </div>
