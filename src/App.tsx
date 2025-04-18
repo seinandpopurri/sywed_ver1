@@ -40,11 +40,11 @@ export default function App() {
         const part3Bottom = part3Rect.bottom - containerRect.top;
         const viewportHeight = containerRect.height;
         
-        // 파트3이 화면의 50% 이상을 차지할 때만 컨트롤러 표시
+        // 파트3이 화면에 충분히 표시될 때만 컨트롤러 표시
+        const visibleHeight = Math.min(part3Bottom, viewportHeight) - Math.max(part3Top, 0);
         const isPart3Visible = 
-          part3Top < viewportHeight / 2 && 
-          part3Bottom > viewportHeight / 2 &&
-          Math.min(part3Bottom, viewportHeight) - Math.max(part3Top, 0) > viewportHeight * 0.5;
+          visibleHeight > 0 && 
+          visibleHeight > viewportHeight * 0.5;
         
         setShowDirectionPad(isPart3Visible);
       }
@@ -80,15 +80,16 @@ export default function App() {
     <div className="w-screen h-screen bg-sky-100 flex justify-center items-center relative">
       {showDirectionPad && (
         <div
-          className="absolute z-50 bottom-[150px] lg:bottom-[180px]"
+          className="absolute z-[100] bottom-[18%] lg:bottom-[8%]"
           style={{
             width: "110px",
             height: "110px",
             left: "50%",
             transform: "translateX(-50%)",
+            paddingBottom: "env(safe-area-inset-bottom, 0px)"
           }}
         >
-          <div className="relative w-full h-full rounded-full bg-white/90 shadow-lg flex items-center justify-center backdrop-blur-sm border-2 border-pink-300">
+          <div className="relative w-full h-full rounded-full bg-white/90 shadow-lg flex items-center justify-center backdrop-blur-sm border-2 border-gray-300">
             {/* 방향키 버튼들 */}
             {[
               {
@@ -146,41 +147,41 @@ export default function App() {
                   position: "absolute",
                   width: "32px",
                   height: "32px",
-                  backgroundColor: "#f9d2e7",
+                  backgroundColor: "#f1f1f1",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
                   transition: "all 0.2s",
-                  border: "1px solid #f9a8d4",
-                  color: "#be185d",
+                  border: "1px solid #d1d1d1",
+                  color: "#4b4b4b",
                   fontSize: "16px",
                   fontWeight: "bold",
                   boxShadow: "0 1px 2px rgba(0,0,0,0.1)",
                   ...btn.style,
                 }}
                 onTouchStart={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f472b6";
+                  e.currentTarget.style.backgroundColor = "#e0e0e0";
                   const transform = btn.dir === "up" || btn.dir === "down"
                     ? "translateX(-50%) scale(0.95)"
                     : "translateY(-50%) scale(0.95)";
                   e.currentTarget.style.transform = transform;
                 }}
                 onTouchEnd={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f9d2e7";
+                  e.currentTarget.style.backgroundColor = "#f1f1f1";
                   const transform = btn.dir === "up" || btn.dir === "down"
                     ? "translateX(-50%)"
                     : "translateY(-50%)";
                   e.currentTarget.style.transform = transform;
                 }}
                 onMouseDown={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f472b6";
+                  e.currentTarget.style.backgroundColor = "#e0e0e0";
                   const transform = btn.dir === "up" || btn.dir === "down"
                     ? "translateX(-50%) scale(0.95)"
                     : "translateY(-50%) scale(0.95)";
                   e.currentTarget.style.transform = transform;
                 }}
                 onMouseUp={(e) => {
-                  e.currentTarget.style.backgroundColor = "#f9d2e7";
+                  e.currentTarget.style.backgroundColor = "#f1f1f1";
                   const transform = btn.dir === "up" || btn.dir === "down"
                     ? "translateX(-50%)"
                     : "translateY(-50%)";

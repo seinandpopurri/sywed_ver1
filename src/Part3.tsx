@@ -50,6 +50,9 @@ export default function Part3({ scrollContainerRef }: Part3Props) {
   const hasMounted = useRef(false);
 
   const move = (dir: "up" | "down" | "left" | "right") => {
+    // 방향키를 움직이면 힌트 메시지를 숨김
+    setShowHint(false);
+    
     setPosition((prev) => {
       const next = { ...prev };
       if (dir === "up") next.y = Math.max(prev.y - 1, 0);
@@ -92,8 +95,14 @@ export default function Part3({ scrollContainerRef }: Part3Props) {
 
       const offset = characterRect.top - containerRect.top;
 
+      // 화면 크기를 체크하여 스크롤 위치를 조정
+      const isMobile = window.innerWidth <= 768;
+      // 모바일에서는 화면의 50% 지점에, 큰 화면에서는 70% 지점에 캐릭터를 위치시킵니다
+      const scrollPosition = isMobile ? 0.50 : 0.70;
+      
+      // 캐릭터 위치가 화면의 적절한 지점으로 오도록 스크롤 조정
       const targetScrollTop =
-        container.scrollTop + offset - container.clientHeight / 2 + TILE_SIZE;
+        container.scrollTop + offset - container.clientHeight * scrollPosition;
       const maxScrollTop = container.scrollHeight - container.clientHeight;
       
       const part3Section = container.querySelectorAll('section')[2];
@@ -112,9 +121,9 @@ export default function Part3({ scrollContainerRef }: Part3Props) {
   }, [position]);
 
   useEffect(() => {
+    // 컴포넌트 마운트 시 힌트 표시
     setShowHint(true);
-    const timeout = setTimeout(() => setShowHint(false), 4000);
-    return () => clearTimeout(timeout);
+    // 타임아웃 제거 - 방향키를 누를 때까지 계속 표시
   }, []);
 
   useEffect(() => {
