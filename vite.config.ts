@@ -5,13 +5,15 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   server: {
+    host: '0.0.0.0', // 모든 네트워크 인터페이스에서 접속 허용
     hmr: {
-      overlay: true, // 오류가 있을 때 오버레이 표시
-      timeout: 1000, // HMR 연결 제한 시간 (밀리초)
+      overlay: true, // 오류가 발생할 때 화면에 오버레이 표시
     },
     watch: {
-      usePolling: true, // 파일 변경 감지를 폴링 방식으로 사용 (더 안정적)
-      interval: 100, // 폴링 간격 (밀리초)
+      usePolling: true, // 폴링 방식으로 파일 변경 감지 (특정 환경에서 필요할 수 있음)
     }
   },
+  preview: {
+    host: '0.0.0.0' // 프리뷰 서버도 모든 네트워크 인터페이스에서 접속 허용
+  }
 });

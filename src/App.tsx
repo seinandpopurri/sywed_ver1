@@ -1,57 +1,70 @@
 import { useEffect, useRef, useState } from "react";
 import Part1 from "./Part1";
-import Part2 from "./Part2";
-import Part3 from "./Part3";
-import Part4 from "./Part4";
-import Part5 from "./Part5";
 import "./index.css";
+import MenuPage from "./pages/MenuPage";
+import GalleryWalk from "./pages/GalleryWalk";
+import PhotoWithUs from "./pages/PhotoWithUs";
+import FamilyTree from "./pages/FamilyTree";
+import GuestBook from "./pages/GuestBook";
+
+// 페이지 타입 정의
+type PageType = "home" | "menu" | "gallery" | "photo" | "family" | "guestbook";
 
 export default function App() {
   const [showHeader, setShowHeader] = useState(false);
   const [showDirectionPad, setShowDirectionPad] = useState(false);
+  const [currentPage, setCurrentPage] = useState<PageType>("home");
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const sectionRefs = useRef<Record<string, HTMLElement | null>>({
+    home: null,
+    menu: null
+  });
 
   useEffect(() => {
-    // 페이지 로드 시 맨 위로 스크롤
+    // 페이지 로드 시 맨 위로 스크롤 (최초 로드시에만 실행)
     scrollRef.current?.scrollTo({ top: 0 });
   }, []);
 
+  // 페이지 변경시 헤더 표시 여부 설정 (별도의 useEffect로 분리)
   useEffect(() => {
-    const handleScroll = () => {
-      if (!scrollRef.current) return;
-      
-      const scrollTop = scrollRef.current.scrollTop;
-      const screenHeight = scrollRef.current.offsetHeight;
-      
-      // 헤더 표시 여부 설정
-      setShowHeader(scrollTop >= screenHeight * 0.5);
+    // 서브 페이지인 경우 헤더 표시
+    if (currentPage !== "home" && currentPage !== "menu") {
+      setShowHeader(true);
+    }
+  }, [currentPage]);
 
-      // 파트3 감지 및 방향 패드 표시 여부 설정
-      const sectionElements = scrollRef.current.querySelectorAll("section");
-      const part3Section = sectionElements[2];
-      
-      if (part3Section) {
-        const part3Rect = part3Section.getBoundingClientRect();
-        const containerRect = scrollRef.current.getBoundingClientRect();
-        
-        // 파트3이 화면에 보이는지 확인
-        const part3Top = part3Rect.top - containerRect.top;
-        const part3Bottom = part3Rect.bottom - containerRect.top;
-        const viewportHeight = containerRect.height;
-        
-        // 파트3이 화면에 충분히 표시될 때만 컨트롤러 표시
-        const visibleHeight = Math.min(part3Bottom, viewportHeight) - Math.max(part3Top, 0);
-        const isPart3Visible = 
-          visibleHeight > 0 && 
-          visibleHeight > viewportHeight * 0.5;
-        
-        setShowDirectionPad(isPart3Visible);
+  // 스크롤 이벤트 핸들러
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    
+    const scrollTop = scrollRef.current.scrollTop;
+    const screenHeight = scrollRef.current.offsetHeight;
+    
+    // 헤더 표시 여부 설정 - 첫 번째 페이지를 지나면 표시
+    setShowHeader(scrollTop >= screenHeight * 0.5);
+
+    // 현재 화면의 위치에 따라 페이지 상태 업데이트
+    if (scrollTop < screenHeight * 0.5) {
+      // 홈 페이지 영역
+      if (currentPage === "home" || currentPage === "menu") {
+        setCurrentPage("home");
       }
-    };
+    } else {
+      // 메뉴 페이지 영역
+      if (currentPage === "home" || currentPage === "menu") {
+        setCurrentPage("menu");
+      }
+    }
+  };
 
+  useEffect(() => {
     const ref = scrollRef.current;
-    if (ref) {
+    
+    // 현재 페이지가 갤러리일 때 방향 패드 표시
+    setShowDirectionPad(currentPage === "gallery");
+    
+    if (ref && (currentPage === "home" || currentPage === "menu")) {
       ref.addEventListener("scroll", handleScroll);
     }
     
@@ -60,7 +73,47 @@ export default function App() {
         ref.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
+  }, [currentPage]);
+
+  // 메뉴 페이지로 이동하는 함수
+  const goToMenu = () => {
+    sectionRefs.current.menu?.scrollIntoView({ behavior: 'smooth' });
+    setCurrentPage("menu");
+  };
+
+  // 메뉴 페이지에서 특정 메뉴 선택 시 호출되는 함수
+  const handleMenuSelect = (page: PageType) => {
+    // 스크롤 이벤트 제거
+    const ref = scrollRef.current;
+    if (ref) {
+      ref.removeEventListener("scroll", handleScroll);
+    }
+    
+    // 페이지 상태 업데이트
+    setCurrentPage(page);
+  };
+
+  // 서브 페이지에서 메뉴 페이지로 돌아가는 함수
+  const goBackToMenu = () => {
+    // 페이지 상태 먼저 변경
+    setCurrentPage("menu");
+    
+    // 메뉴 페이지로 바로 스크롤 - requestAnimationFrame 사용하여 DOM 업데이트 후 실행
+    requestAnimationFrame(() => {
+      if (scrollRef.current && sectionRefs.current.menu) {
+        const screenHeight = scrollRef.current.offsetHeight;
+        scrollRef.current.scrollTop = screenHeight; // 첫 페이지 높이만큼 스크롤
+      }
+      
+      // 스크롤 이벤트 리스너 추가
+      setTimeout(() => {
+        const ref = scrollRef.current;
+        if (ref) {
+          ref.addEventListener("scroll", handleScroll);
+        }
+      }, 100);
+    });
+  };
 
   const startMoving = (dir: string) => {
     window.dispatchEvent(new CustomEvent("move", { detail: dir }));
@@ -73,6 +126,39 @@ export default function App() {
     if (intervalRef.current) {
       clearInterval(intervalRef.current as unknown as number);
       intervalRef.current = null;
+    }
+  };
+
+  // 현재 페이지에 따라 렌더링할 컴포넌트 결정
+  const renderPage = () => {
+    switch (currentPage) {
+      case "home":
+      case "menu":
+        return (
+          <>
+            <section 
+              ref={(el) => { sectionRefs.current.home = el; }} 
+              className="h-full"
+              onClick={goToMenu}
+            >
+              <Part1 />
+            </section>
+            <section 
+              ref={(el) => { sectionRefs.current.menu = el; }} 
+              className="h-full"
+            >
+              <MenuPage onMenuSelect={handleMenuSelect} />
+            </section>
+          </>
+        );
+      case "gallery":
+        return <GalleryWalk onBack={goBackToMenu} scrollContainerRef={scrollRef} />;
+      case "photo":
+        return <PhotoWithUs onBack={goBackToMenu} />;
+      case "family":
+        return <FamilyTree onBack={goBackToMenu} />;
+      case "guestbook":
+        return <GuestBook onBack={goBackToMenu} />;
     }
   };
 
@@ -196,14 +282,16 @@ export default function App() {
       )}
 
       <div
-        className="relative overflow-hidden shadow-xl rounded-xl"
+        className="relative overflow-hidden shadow-xl"
         style={{ width: "393px", height: "852px", maxHeight: "100vh" }}
       >
-        {showHeader && (
+        {/* 서브페이지이거나 스크롤이 충분히 내려간 경우 헤더 표시 */}
+        {(currentPage !== "home" || showHeader) && (
           <div
-            className="absolute top-0 left-0 w-full bg-white/80 text-center py-2 z-50 backdrop-blur-sm"
+            className="absolute top-0 left-0 w-full bg-white/80 text-center py-2 z-[100] backdrop-blur-sm"
             style={{ 
-              paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)"
+              paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)",
+              width: "393px"
             }}
           >
             <p className="text-xs">
@@ -226,34 +314,10 @@ export default function App() {
           className="h-full w-full overflow-y-auto overflow-x-hidden hide-scrollbar"
           style={{ 
             touchAction: "pan-y", 
-            overscrollBehavior: "contain",
-            scrollBehavior: "smooth" 
+            overscrollBehavior: "contain"
           }}
         >
-          <section className="h-full">
-            <Part1 />
-          </section>
-          <section className="h-full">
-            <Part2 />
-          </section>
-          <section
-            className="bg-pink-200"
-            style={{ 
-              height: `${(48 + 4 + 3) * 36}px`, // LAST_PHOTO_Y + PHOTO_HEIGHT + EXTRA_BOTTOM_SPACE * TILE_SIZE
-              paddingBottom: "20px",
-              marginBottom: "-20px"
-            }}
-          >
-            <Part3 scrollContainerRef={scrollRef} />
-          </section>
-
-          <section className="h-full overflow-hidden">
-            <Part4 paddingTop={20} />
-          </section>
-
-          <section className="h-full bg-white">
-            <Part5 />
-          </section>
+          {renderPage()}
         </div>
       </div>
     </div>

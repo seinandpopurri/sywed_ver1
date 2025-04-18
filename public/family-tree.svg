@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 배경 -->
+  <rect width="1000" height="700" fill="#f0f9f0" rx="10" ry="10" />
+  
+  <!-- 중앙 하트 -->
+  <path d="M500 350 L485 335 Q470 320 450 335 Q430 350 450 370 L500 420 L550 370 Q570 350 550 335 Q530 320 515 335 Z" fill="#FF9999" stroke="#FF6666" stroke-width="2" />
+  
+  <!-- 중앙 세로선 -->
+  <line x1="500" y1="420" x2="500" y2="500" stroke="#88b884" stroke-width="2" />
+  
+  <!-- 신랑측 가족 (왼쪽) -->
+  <g id="groom-family">
+    <!-- 신랑 -->
+    <circle cx="400" cy="350" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="400" y="355" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">신랑</text>
+    
+    <!-- 신랑과 중앙 하트 연결선 -->
+    <line x1="435" y1="350" x2="470" y2="350" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 신랑 부모님 -->
+    <circle cx="300" cy="250" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="300" y="255" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">아버지</text>
+    
+    <circle cx="400" cy="250" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="400" y="255" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">어머니</text>
+    
+    <!-- 연결선 -->
+    <line x1="300" y1="285" x2="300" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="400" y1="285" x2="400" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="300" y1="300" x2="400" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="350" y1="300" x2="350" y2="315" stroke="#88b884" stroke-width="2" />
+    <line x1="350" y1="315" x2="400" y2="315" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 신랑 형제 -->
+    <circle cx="300" cy="350" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="300" y="355" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">형제</text>
+    
+    <!-- 연결선 -->
+    <line x1="300" y1="315" x2="300" y2="315" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 조부모 -->
+    <circle cx="200" cy="150" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="200" y="155" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">할아버지</text>
+    
+    <circle cx="300" cy="150" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="300" y="155" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">할머니</text>
+    
+    <!-- 연결선 -->
+    <line x1="200" y1="185" x2="200" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="300" y1="185" x2="300" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="200" y1="200" x2="300" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="250" y1="200" x2="250" y2="215" stroke="#88b884" stroke-width="2" />
+    <line x1="250" y1="215" x2="300" y2="215" stroke="#88b884" stroke-width="2" />
+  </g>
+  
+  <!-- 신부측 가족 (오른쪽) -->
+  <g id="bride-family">
+    <!-- 신부 -->
+    <circle cx="600" cy="350" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="600" y="355" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">신부</text>
+    
+    <!-- 신부와 중앙 하트 연결선 -->
+    <line x1="565" y1="350" x2="530" y2="350" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 신부 부모님 -->
+    <circle cx="700" cy="250" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="700" y="255" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">아버지</text>
+    
+    <circle cx="600" cy="250" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="600" y="255" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">어머니</text>
+    
+    <!-- 연결선 -->
+    <line x1="700" y1="285" x2="700" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="600" y1="285" x2="600" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="600" y1="300" x2="700" y2="300" stroke="#88b884" stroke-width="2" />
+    <line x1="650" y1="300" x2="650" y2="315" stroke="#88b884" stroke-width="2" />
+    <line x1="650" y1="315" x2="600" y2="315" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 신부 형제 -->
+    <circle cx="700" cy="350" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="700" y="355" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">자매</text>
+    
+    <!-- 연결선 -->
+    <line x1="700" y1="315" x2="700" y2="315" stroke="#88b884" stroke-width="2" />
+    
+    <!-- 조부모 -->
+    <circle cx="800" cy="150" r="35" fill="#aed4f5" stroke="#6699CC" stroke-width="2" />
+    <text x="800" y="155" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">할아버지</text>
+    
+    <circle cx="700" cy="150" r="35" fill="#f5ceae" stroke="#CC9966" stroke-width="2" />
+    <text x="700" y="155" font-family="Arial" font-size="16" text-anchor="middle" fill="#333333">할머니</text>
+    
+    <!-- 연결선 -->
+    <line x1="800" y1="185" x2="800" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="700" y1="185" x2="700" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="700" y1="200" x2="800" y2="200" stroke="#88b884" stroke-width="2" />
+    <line x1="750" y1="200" x2="750" y2="215" stroke="#88b884" stroke-width="2" />
+    <line x1="750" y1="215" x2="700" y2="215" stroke="#88b884" stroke-width="2" />
+  </g>
+  
+  <!-- 새로운 가족 (아래) -->
+  <g id="new-family">
+    <circle cx="500" cy="500" r="40" fill="#e6f7ff" stroke="#88b884" stroke-width="3" />
+    <text x="500" y="505" font-family="Arial" font-size="18" text-anchor="middle" fill="#333333">새 가족</text>
+  </g>
+  
+  <!-- 제목 -->
+  <text x="500" y="60" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#558855">가족 트리</text>
+  
+  <!-- 설명 -->
+  <text x="500" y="600" font-family="Arial" font-size="16" text-anchor="middle" fill="#558855">두 가족이 만나 새로운 가족을 이룹니다</text>
+</svg>
