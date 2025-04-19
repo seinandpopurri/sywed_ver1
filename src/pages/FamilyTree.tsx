@@ -58,7 +58,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           left: '7%',
-          top: '18%',
+          top: '25%',
           width: '30%'
         }}
       />
@@ -70,7 +70,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           right: '10%',
-          top: '10%',
+          top: '18%',
           width: '25%'
         }}
       />
@@ -88,7 +88,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
       <div className="relative z-20 w-full h-full flex flex-col items-center justify-center overflow-hidden">
         {/* 안내 메시지 - 상단 배치 */}
         {showGuide && (
-          <div className="absolute top-16 left-0 right-0 z-30 flex justify-center">
+          <div className="absolute top-20 left-0 right-0 z-30 flex justify-center">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md text-center">
               <p className="text-sm font-regular text-gray-800 leading-tight">이름을 눌러서 정보를 확인하세요.</p>
               <p className="text-sm font-regular text-gray-800 leading-tight mt-0.5">화환은 정중히 사양합니다.</p>
@@ -96,14 +96,18 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
           </div>
         )}
         
-        <div className="relative w-full h-full flex items-center justify-center">
+        <div className="relative w-full h-full flex items-center justify-center mt-12">
           {/* SVG 이미지 */}
           <div className="relative w-full max-w-md">
             <img 
               src="/new_family_tree.svg" 
               alt="가족 트리" 
               className="w-full"
-              style={{ maxHeight: '85vh', objectFit: 'contain' }}
+              style={{ 
+                maxHeight: '75vh',
+                objectFit: 'contain',
+                marginTop: '20px'
+              }}
             />
             
             {/* 1행: 양경희, 이정길, 김시은, 홍성면 */}
@@ -113,7 +117,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '4%', top: '1%', width: '17%', height: '8%' }}
+              style={{ left: '4%', top: '5%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -122,7 +126,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '30%', top: '1%', width: '17%', height: '8%' }}
+              style={{ left: '30%', top: '5%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -131,7 +135,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '53%', top: '1%', width: '17%', height: '8%' }}
+              style={{ left: '53%', top: '5%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -140,7 +144,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '79%', top: '1%', width: '17%', height: '8%' }}
+              style={{ left: '79%', top: '5%', width: '17%', height: '8%' }}
             />
             
             {/* 2행: 이은지, 이영건, 홍세인, 홍세영 */}
@@ -150,7 +154,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '7%', top: '44%', width: '17%', height: '8%' }}
+              style={{ left: '7%', top: '48%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -159,7 +163,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '27%', top: '44%', width: '17%', height: '8%' }}
+              style={{ left: '27%', top: '48%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -168,7 +172,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '56%', top: '44%', width: '17%', height: '8%' }}
+              style={{ left: '56%', top: '48%', width: '17%', height: '8%' }}
             />
             
             <button 
@@ -177,7 +181,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '77%', top: '44%', width: '17%', height: '8%' }}
+              style={{ left: '77%', top: '48%', width: '17%', height: '8%' }}
             />
             
             {/* 3행: 밀레 */}
@@ -187,7 +191,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
                 setShowGuide(false);
               }} 
               className="absolute"
-              style={{ left: '41%', top: '55%', width: '17%', height: '8%' }}
+              style={{ left: '41%', top: '59%', width: '17%', height: '8%' }}
             />
           </div>
         </div>
