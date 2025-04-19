@@ -20,12 +20,12 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
 
   // 가족 구성원 데이터
   const familyMembers: FamilyMember[] = [
-    { id: "yangkyunghee", name: "양경희", relation: "이은지, 이영건의 엄마", phone: "010-2017-7716", bankAccount: "100-1111-1111 농협" },
-    { id: "leejungkil", name: "이정길", relation: "이은지, 이영건의 아빠", phone: "010-2354-9962", bankAccount: "100-2222-2222 농협" },
+    { id: "yangkyunghee", name: "양경희", relation: "이은지, 이영건의 엄마", phone: "010-2017-7716", bankAccount: "000-0000-0000 신한" },
+    { id: "leejungkil", name: "이정길", relation: "이은지, 이영건의 아빠", phone: "010-2354-9962", bankAccount: "000-0000-0000 국민" },
     { id: "leeunji", name: "이은지", relation: "양경희, 이정길의 딸\n이영건의 누나\n손상옥의 아내\n손현빈의 엄마", isChild: true },
-    { id: "leeyounggun", name: "이영건", relation: "양경희, 이정길의 아들\n이은지의 동생", phone: "010-5104-9962", bankAccount: "110-274-870261 신한은행" },
+    { id: "leeyounggun", name: "이영건", relation: "양경희, 이정길의 아들\n이은지의 동생", phone: "010-5104-9962", bankAccount: "110-274-870261 신한" },
     { id: "kimsieun", name: "김시은", relation: "홍세인, 홍세영의 엄마", phone: "010-9209-4919", bankAccount: "352-1887-6759-73 농협" },
-    { id: "hongseongmyun", name: "홍성면", relation: "홍세인, 홍세영의 아빠", phone: "010-9749-0030", bankAccount: "100-4444-4444 농협" },
+    { id: "hongseongmyun", name: "홍성면", relation: "홍세인, 홍세영의 아빠", phone: "010-9749-0030", bankAccount: "100-135-020298 케이뱅크" },
     { id: "hongsein", name: "홍세인", relation: "김시은, 홍성면의 딸\n홍세영의 언니", phone: "010-6470-8811", bankAccount: "100-190-830082 케이뱅크" },
     { id: "hongseeyoung", name: "홍세영", relation: "홍세인, 홍성면의 딸\n홍세인의 동생", isChild: true },
     { id: "mire", name: "밀레", relation: "홍세인, 이영건의 반려견", isChild: true },
