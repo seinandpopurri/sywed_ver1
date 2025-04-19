@@ -49,7 +49,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
   return (
     <div className="relative w-full h-full overflow-hidden">
       {/* 배경 - 위아래 두 색상 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#DEFE63] from-70% to-[#7fcd1b] to-30% z-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#DEFE63] from-75% to-[#7fcd1b] to-25% z-0"></div>
       
       {/* 구름 이미지 */}
       <img 
@@ -58,7 +58,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           left: '7%',
-          top: '25%',
+          top: '20%',
           width: '30%'
         }}
       />
@@ -70,7 +70,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           right: '10%',
-          top: '18%',
+          top: '4%',
           width: '25%'
         }}
       />
