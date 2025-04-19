@@ -2,39 +2,49 @@ import { useState, useEffect, useRef, RefObject } from "react";
 
 // 상수 정의
 const GRID_WIDTH = 11;
-const GRID_HEIGHT = 60;
+const GRID_HEIGHT = 90;
 const TILE_SIZE = 36;
 
 // 첫 번째 사진의 Y 위치
 const FIRST_PHOTO_Y = 3;
 // 마지막 사진의 Y 위치
-const LAST_PHOTO_Y = 48;
+const LAST_PHOTO_Y = 73;
 // 마지막 사진의 높이
 const PHOTO_HEIGHT = 4;
 // 여백을 확장할 추가 공간
-const EXTRA_BOTTOM_SPACE = FIRST_PHOTO_Y;
+const EXTRA_BOTTOM_SPACE = 6; // 마지막 사진 아래 여백 확장
 
 const photos = [
-  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "도쿄에서", imagePath: "/gallery/left_01.jpg" },
-  { id: "left-1", side: "left", x: 1, y: 8, message: "따뜻한 날씨", imagePath: "/gallery/left_02.jpg" },
-  { id: "left-2", side: "left", x: 1, y: 13, message: "산책 중 한 컷", imagePath: "/gallery/left_03.jpg" },
-  { id: "left-3", side: "left", x: 1, y: 18, message: "꽃 피던 날", imagePath: "/gallery/left_04.jpg" },
-  { id: "left-4", side: "left", x: 1, y: 23, message: "생일 기념🎂", imagePath: "/gallery/left_05.jpg" },
-  { id: "left-5", side: "left", x: 1, y: 28, message: "카페 데이트", imagePath: "/gallery/left_06.jpg" },
-  { id: "left-6", side: "left", x: 1, y: 33, message: "저녁 노을", imagePath: "/gallery/left_07.jpg" },
-  { id: "left-7", side: "left", x: 1, y: 38, message: "길고양이랑 🐾", imagePath: "/gallery/left_08.jpg" },
-  { id: "left-8", side: "left", x: 1, y: 43, message: "벚꽃 아래에서", imagePath: "/gallery/left_09.jpg" },
-  { id: "left-9", side: "left", x: 1, y: LAST_PHOTO_Y, message: "첫 여행 기억", imagePath: "/gallery/left_10.jpg" },
-  { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "눈 오는 날", imagePath: "/gallery/right_01.jpg" },
-  { id: "right-1", side: "right", x: 7, y: 8, message: "우산 속 우리", imagePath: "/gallery/right_02.jpg" },
-  { id: "right-2", side: "right", x: 7, y: 13, message: "한강에서", imagePath: "/gallery/right_03.jpg" },
-  { id: "right-3", side: "right", x: 7, y: 18, message: "일요일 오전", imagePath: "/gallery/right_04.jpg" },
-  { id: "right-4", side: "right", x: 7, y: 23, message: "고양이처럼", imagePath: "/gallery/right_05.jpg" },
-  { id: "right-5", side: "right", x: 7, y: 28, message: "생각에 잠긴 날", imagePath: "/gallery/right_06.jpg" },
-  { id: "right-6", side: "right", x: 7, y: 33, message: "바닷가에서 🌊", imagePath: "/gallery/right_07.jpg" },
-  { id: "right-7", side: "right", x: 7, y: 38, message: "빵집 앞에서", imagePath: "/gallery/right_08.jpg" },
-  { id: "right-8", side: "right", x: 7, y: 43, message: "기차 타기 전", imagePath: "/gallery/right_09.jpg" },
-  { id: "right-9", side: "right", x: 7, y: LAST_PHOTO_Y, message: "조용한 오후", imagePath: "/gallery/right_10.jpg" },
+  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "술 많이 마신 날", imagePath: "/gallery/left_01.jpg" },
+  { id: "left-1", side: "left", x: 1, y: 8, message: "재범 결혼식에서", imagePath: "/gallery/left_02.jpg" },
+  { id: "left-2", side: "left", x: 1, y: 13, message: "처음으로 둘이 놀았던", imagePath: "/gallery/left_03.jpg" },
+  { id: "left-3", side: "left", x: 1, y: 18, message: "두부집 지하", imagePath: "/gallery/left_04.jpg" },
+  { id: "left-4", side: "left", x: 1, y: 23, message: "이상한 선글라스", imagePath: "/gallery/left_05.jpg" },
+  { id: "left-5", side: "left", x: 1, y: 28, message: "Hi", imagePath: "/gallery/left_06.jpg" },
+  { id: "left-6", side: "left", x: 1, y: 33, message: "23년 연말파티", imagePath: "/gallery/left_07.jpg" },
+  { id: "left-7", side: "left", x: 1, y: 38, message: "도쿄 지하철 거울", imagePath: "/gallery/left_08.jpg" },
+  { id: "left-8", side: "left", x: 1, y: 43, message: "코로나 시절", imagePath: "/gallery/left_09.jpg" },
+  { id: "left-9", side: "left", x: 1, y: 48, message: "언리밋 참가", imagePath: "/gallery/left_10.jpg" },
+  { id: "left-10", side: "left", x: 1, y: 53, message: "토스트와 햄버거", imagePath: "/gallery/left_11.jpg" },
+  { id: "left-11", side: "left", x: 1, y: 58, message: "Kiss..", imagePath: "/gallery/left_12.jpg" },
+  { id: "left-12", side: "left", x: 1, y: 63, message: "공항 로봇이 찍어준 사진", imagePath: "/gallery/left_13.jpg" },
+  { id: "left-13", side: "left", x: 1, y: 68, message: "사귈 줄 알았던 날", imagePath: "/gallery/left_14.jpg" },
+  { id: "left-14", side: "left", x: 1, y: LAST_PHOTO_Y, message: "눈부셔", imagePath: "/gallery/left_15.jpg" },
+  { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "21_21 DESIGN SITE", imagePath: "/gallery/right_01.jpg" },
+  { id: "right-1", side: "right", x: 7, y: 8, message: "한강에서", imagePath: "/gallery/right_02.jpg" },
+  { id: "right-2", side: "right", x: 7, y: 13, message: "강아지는 못들어와서", imagePath: "/gallery/right_03.jpg" },
+  { id: "right-3", side: "right", x: 7, y: 18, message: "상견례 끝나고 여수에서", imagePath: "/gallery/right_04.jpg" },
+  { id: "right-4", side: "right", x: 7, y: 23, message: "도쿄 도착", imagePath: "/gallery/right_05.jpg" },
+  { id: "right-5", side: "right", x: 7, y: 28, message: "비싼 옷", imagePath: "/gallery/right_06.jpg" },
+  { id: "right-6", side: "right", x: 7, y: 33, message: "출근길", imagePath: "/gallery/right_07.jpg" },
+  { id: "right-7", side: "right", x: 7, y: 38, message: "뱅쇼 파티", imagePath: "/gallery/right_08.jpg" },
+  { id: "right-8", side: "right", x: 7, y: 43, message: "여수 여행", imagePath: "/gallery/right_09.jpg" },
+  { id: "right-9", side: "right", x: 7, y: 48, message: "한라산 with 희애충근소이", imagePath: "/gallery/right_10.jpg" },
+  { id: "right-10", side: "right", x: 7, y: 53, message: "취함", imagePath: "/gallery/right_11.jpg" },
+  { id: "right-11", side: "right", x: 7, y: 58, message: "엘리베이터", imagePath: "/gallery/right_12.jpg" },
+  { id: "right-12", side: "right", x: 7, y: 63, message: "장난감 총을 주웠다", imagePath: "/gallery/right_13.jpg" },
+  { id: "right-13", side: "right", x: 7, y: 68, message: "진지한 이야기 중", imagePath: "/gallery/right_14.jpg" },
+  { id: "right-14", side: "right", x: 7, y: LAST_PHOTO_Y, message: "돈가스 웨이팅", imagePath: "/gallery/right_15.jpg" },
 ];
 
 interface GalleryWalkProps {
@@ -211,7 +221,7 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
             top: photo.y * TILE_SIZE,
             zIndex: 5,
             backgroundColor: "#e5e7eb",
-            border: "1px solid #a87c56",
+            border: "2px solid #a87c56",
           }}
           onClick={() => setPopupPhotoId(photo.id)}
         >
@@ -284,7 +294,7 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
               left: "50%",
               transform: "translateX(-50%)",
               width: "auto",
-              maxWidth: "120px",
+              maxWidth: "180px",
             }}
           >
             {currentPhoto.message}
