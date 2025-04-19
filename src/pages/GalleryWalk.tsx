@@ -15,26 +15,26 @@ const PHOTO_HEIGHT = 4;
 const EXTRA_BOTTOM_SPACE = FIRST_PHOTO_Y;
 
 const photos = [
-  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "도쿄에서" },
-  { id: "left-1", side: "left", x: 1, y: 8, message: "따뜻한 날씨" },
-  { id: "left-2", side: "left", x: 1, y: 13, message: "산책 중 한 컷" },
-  { id: "left-3", side: "left", x: 1, y: 18, message: "꽃 피던 날" },
-  { id: "left-4", side: "left", x: 1, y: 23, message: "생일 기념🎂" },
-  { id: "left-5", side: "left", x: 1, y: 28, message: "카페 데이트" },
-  { id: "left-6", side: "left", x: 1, y: 33, message: "저녁 노을" },
-  { id: "left-7", side: "left", x: 1, y: 38, message: "길고양이랑 🐾" },
-  { id: "left-8", side: "left", x: 1, y: 43, message: "벚꽃 아래에서" },
-  { id: "left-9", side: "left", x: 1, y: LAST_PHOTO_Y, message: "첫 여행 기억" },
-  { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "눈 오는 날" },
-  { id: "right-1", side: "right", x: 7, y: 8, message: "우산 속 우리" },
-  { id: "right-2", side: "right", x: 7, y: 13, message: "한강에서" },
-  { id: "right-3", side: "right", x: 7, y: 18, message: "일요일 오전" },
-  { id: "right-4", side: "right", x: 7, y: 23, message: "고양이처럼" },
-  { id: "right-5", side: "right", x: 7, y: 28, message: "생각에 잠긴 날" },
-  { id: "right-6", side: "right", x: 7, y: 33, message: "바닷가에서 🌊" },
-  { id: "right-7", side: "right", x: 7, y: 38, message: "빵집 앞에서" },
-  { id: "right-8", side: "right", x: 7, y: 43, message: "기차 타기 전" },
-  { id: "right-9", side: "right", x: 7, y: LAST_PHOTO_Y, message: "조용한 오후" },
+  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "도쿄에서", imagePath: "/gallery/left_01.jpg" },
+  { id: "left-1", side: "left", x: 1, y: 8, message: "따뜻한 날씨", imagePath: "/gallery/left_02.jpg" },
+  { id: "left-2", side: "left", x: 1, y: 13, message: "산책 중 한 컷", imagePath: "/gallery/left_03.jpg" },
+  { id: "left-3", side: "left", x: 1, y: 18, message: "꽃 피던 날", imagePath: "/gallery/left_04.jpg" },
+  { id: "left-4", side: "left", x: 1, y: 23, message: "생일 기념🎂", imagePath: "/gallery/left_05.jpg" },
+  { id: "left-5", side: "left", x: 1, y: 28, message: "카페 데이트", imagePath: "/gallery/left_06.jpg" },
+  { id: "left-6", side: "left", x: 1, y: 33, message: "저녁 노을", imagePath: "/gallery/left_07.jpg" },
+  { id: "left-7", side: "left", x: 1, y: 38, message: "길고양이랑 🐾", imagePath: "/gallery/left_08.jpg" },
+  { id: "left-8", side: "left", x: 1, y: 43, message: "벚꽃 아래에서", imagePath: "/gallery/left_09.jpg" },
+  { id: "left-9", side: "left", x: 1, y: LAST_PHOTO_Y, message: "첫 여행 기억", imagePath: "/gallery/left_10.jpg" },
+  { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "눈 오는 날", imagePath: "/gallery/right_01.jpg" },
+  { id: "right-1", side: "right", x: 7, y: 8, message: "우산 속 우리", imagePath: "/gallery/right_02.jpg" },
+  { id: "right-2", side: "right", x: 7, y: 13, message: "한강에서", imagePath: "/gallery/right_03.jpg" },
+  { id: "right-3", side: "right", x: 7, y: 18, message: "일요일 오전", imagePath: "/gallery/right_04.jpg" },
+  { id: "right-4", side: "right", x: 7, y: 23, message: "고양이처럼", imagePath: "/gallery/right_05.jpg" },
+  { id: "right-5", side: "right", x: 7, y: 28, message: "생각에 잠긴 날", imagePath: "/gallery/right_06.jpg" },
+  { id: "right-6", side: "right", x: 7, y: 33, message: "바닷가에서 🌊", imagePath: "/gallery/right_07.jpg" },
+  { id: "right-7", side: "right", x: 7, y: 38, message: "빵집 앞에서", imagePath: "/gallery/right_08.jpg" },
+  { id: "right-8", side: "right", x: 7, y: 43, message: "기차 타기 전", imagePath: "/gallery/right_09.jpg" },
+  { id: "right-9", side: "right", x: 7, y: LAST_PHOTO_Y, message: "조용한 오후", imagePath: "/gallery/right_10.jpg" },
 ];
 
 interface GalleryWalkProps {
@@ -141,7 +141,7 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
 
   return (
     <div
-      className="relative bg-pink-200"
+      className="relative bg-[#EFEFEF] gallery-text-no-select"
       style={{
         width: `${GRID_WIDTH * TILE_SIZE}px`,
         height: `${(LAST_PHOTO_Y + PHOTO_HEIGHT + EXTRA_BOTTOM_SPACE) * TILE_SIZE}px`,
@@ -153,9 +153,9 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
       {/* 뒤로 가기 버튼 */}
       <button
         onClick={onBack}
-        className="absolute top-[12px] left-4 z-[110] flex items-center justify-center"
+        className="absolute top-[10px] left-1 z-[110] flex items-center justify-center"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#666666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M15 18l-6-6 6-6"/>
         </svg>
       </button>
@@ -171,12 +171,12 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
             top: photo.y * TILE_SIZE,
             zIndex: 5,
             backgroundColor: "#e5e7eb",
-            border: "4px solid #a87c56",
+            border: "1px solid #a87c56",
           }}
           onClick={() => setPopupPhotoId(photo.id)}
         >
           <img
-            src={photo.id === "right-0" ? "/right_01.jpg" : "/left_01.jpg"}
+            src={photo.imagePath}
             alt="사진"
             className="w-full h-full object-cover"
           />
@@ -189,7 +189,7 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
           onClick={() => setPopupPhotoId(null)}
         >
           <img
-            src={popupPhotoId === "right-0" ? "/right_01.jpg" : "/left_01.jpg"}
+            src={photos.find(p => p.id === popupPhotoId)?.imagePath}
             alt="확대된 사진"
             className="w-[250px] h-[333px] object-cover"
           />
@@ -198,14 +198,18 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
 
       {showHint && (
         <div
-          className="absolute text-sm text-center bg-white/80 px-3 py-1 rounded shadow z-30"
+          className="absolute text-xs text-center bg-white/80 px-4 py-2 rounded shadow z-30"
           style={{
             left: position.x * TILE_SIZE + TILE_SIZE / 2,
             top: position.y * TILE_SIZE + 50,
             transform: "translateX(-50%)",
+            width: "250px",
+            lineHeight: "1.5"
           }}
         >
-          사진쪽으로 다가가보세요.
+          밀레를 움직여서 사진쪽으로 다가가 보세요.
+          <br />
+          사진을 클릭하면 더 크게 볼 수 있습니다.
         </div>
       )}
 
@@ -219,14 +223,17 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
           width: TILE_SIZE,
           height: TILE_SIZE,
           zIndex: 10,
-          transition: "all 0.15s ease-out",
+          transition: "transform 0.1s linear"
         }}
       >
         {/* 캐릭터 아바타 */}
-        <div
-          className="w-7 h-7 bg-blue-500 rounded-full shadow-md"
-          style={{ border: "2px solid white" }}
-        />
+        <div className="w-8 h-8">
+          <img 
+            src="/gallery_millet.png" 
+            alt="밀레 캐릭터" 
+            className="w-full h-full object-contain"
+          />
+        </div>
 
         {/* 사진에 접근했을 때 메시지 */}
         {currentPhoto && (

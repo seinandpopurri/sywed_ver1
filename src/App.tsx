@@ -163,19 +163,19 @@ export default function App() {
   };
 
   return (
-    <div className="w-screen h-screen bg-sky-100 flex justify-center items-center relative">
+    <div className="w-screen h-screen bg-[#F7F7F7] flex justify-center items-center relative">
       {showDirectionPad && (
         <div
           className="absolute z-[100] bottom-[18%] lg:bottom-[8%]"
           style={{
-            width: "110px",
-            height: "110px",
+            width: "130px",
+            height: "130px",
             left: "50%",
             transform: "translateX(-50%)",
             paddingBottom: "env(safe-area-inset-bottom, 0px)"
           }}
         >
-          <div className="relative w-full h-full rounded-full bg-white/90 shadow-lg flex items-center justify-center backdrop-blur-sm border-2 border-gray-300">
+          <div className="relative w-full h-full rounded-full bg-white/90 shadow-lg flex items-center justify-center backdrop-blur-sm border-gray-300">
             {/* 방향키 버튼들 */}
             {[
               {
@@ -231,8 +231,8 @@ export default function App() {
                 tabIndex={-1}
                 style={{
                   position: "absolute",
-                  width: "32px",
-                  height: "32px",
+                  width: "36px",
+                  height: "36px",
                   backgroundColor: "#f1f1f1",
                   display: "flex",
                   alignItems: "center",
@@ -288,24 +288,25 @@ export default function App() {
         {/* 서브페이지이거나 스크롤이 충분히 내려간 경우 헤더 표시 */}
         {(currentPage !== "home" || showHeader) && (
           <div
-            className="absolute top-0 left-0 w-full bg-white/80 text-center py-2 z-[100] backdrop-blur-sm"
+            className="absolute top-0 left-0 w-full bg-white/80 text-center py-2 z-[100] backdrop-blur-sm no-select"
             style={{ 
               paddingTop: "calc(env(safe-area-inset-top, 0px) + 8px)",
-              width: "393px"
+              left: 0,
+              right: 0
             }}
           >
-            <p className="text-xs">
-              2025. 6. 8. (Sun) 2:00 p.m.{" "}
+            <p className="text-xs mx-auto">
+              2025. 6. 8. Sun. 2:00 p.m. {" "}
               <a
                 href="https://map.naver.com/v5/search/아만티%20호텔%20서울"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[#3b82f6] transition-colors duration-200"
+                className="hover:text-[#FF80D2] transition-colors duration-200"
               >
                 아만티 호텔 서울
               </a>
             </p>
-            <p className="text-xs">홍세인과 이영건의 결혼식에 초대합니다.</p>
+            <p className="text-xs mx-auto">홍세인과 이영건의 결혼식에 초대합니다.</p>
           </div>
         )}
 

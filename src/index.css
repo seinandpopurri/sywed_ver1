@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 텍스트 선택 방지 클래스 추가 - GalleryWalk 페이지에서만 적용 */
+.gallery-text-no-select {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-touch-callout: none !important;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #FFFFF0;
+  color: #3d3b38;
+  height: 100vh;
+  overflow-x: hidden;
+  
+  /* 기본적으로 텍스트 선택 가능하도록 설정 */
+  user-select: auto;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+}
+
 html,
 body,
 #root {
@@ -31,8 +58,7 @@ body,
   }
 }
 
-/* index.css */
-
+/* 버튼 관련 스타일 */
 .no-select-btn {
   user-select: none;
   -webkit-user-select: none;
@@ -40,16 +66,9 @@ body,
   -webkit-tap-highlight-color: transparent;
   appearance: none;
   outline: none;
-
-  .no-select {
-    user-select: none;
-    -webkit-user-select: none;
-  }
 }
 
-/* 웹 전체 블록 금지 */
-* {
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -webkit-touch-callout: none !important; /* iOS에서 복사 팝업도 차단 */
+.no-select {
+  user-select: none;
+  -webkit-user-select: none;
 }
