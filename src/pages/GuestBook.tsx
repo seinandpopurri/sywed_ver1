@@ -182,7 +182,7 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
               placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black"
+              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black placeholder-black"
               style={{ WebkitAppearance: 'none' }}
             />
           </div>
@@ -193,7 +193,7 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
               placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
-              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black"
+              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black placeholder-black"
               style={{ WebkitAppearance: 'none' }}
             />
           </div>
@@ -203,9 +203,9 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
             placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent resize-none appearance-none rounded-none text-black"
+            className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent resize-none appearance-none rounded-none text-black placeholder-black"
             style={{ WebkitAppearance: 'none' }}
-            rows={2}
+            rows={1}
           />
         </div>
         
