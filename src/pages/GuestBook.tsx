@@ -177,36 +177,33 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
       <form className="w-full max-w-md mb-8">
         <div className="flex justify-between mb-4">
           <div className="w-[48%]">
-            <label className="block text-sm font-medium mb-1">Name</label>
             <input
               type="text"
-              placeholder="이름"
+              placeholder="Name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none"
+              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black"
               style={{ WebkitAppearance: 'none' }}
             />
           </div>
           <div className="w-[48%]">
-            <label className="block text-sm font-medium mb-1">Password</label>
             <input
               type="text"
               inputMode="numeric"
-              placeholder="숫자 4자리"
+              placeholder="Password"
               value={password}
               onChange={handlePasswordChange}
-              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none"
+              className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent appearance-none rounded-none text-black"
               style={{ WebkitAppearance: 'none' }}
             />
           </div>
         </div>
         <div className="mb-4">
-          <label className="block text-sm font-medium mb-1">Message</label>
           <textarea
-            placeholder="메시지"
+            placeholder="Message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent resize-none appearance-none rounded-none"
+            className="w-full border-b border-gray-800 focus:outline-none px-0 py-1 bg-transparent resize-none appearance-none rounded-none text-black"
             style={{ WebkitAppearance: 'none' }}
             rows={2}
           />
