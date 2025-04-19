@@ -58,7 +58,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           left: '7%',
-          top: '20%',
+          top: '15%',
           width: '30%'
         }}
       />
