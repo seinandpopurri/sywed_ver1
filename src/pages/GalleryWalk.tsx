@@ -125,6 +125,25 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
   }, []);
 
   useEffect(() => {
+    // 컴포넌트 마운트 시 힌트 표시
+    setShowHint(true);
+    // 타임아웃 제거 - 방향키를 누를 때까지 계속 표시
+    
+    // 컴포넌트 마운트 시 스크롤 위치를 맨 위로 설정
+    if (scrollContainerRef?.current) {
+      // 즉시 실행 및 약간의 지연 후 한번 더 실행 (안정성을 위해)
+      scrollContainerRef.current.scrollTo({ top: 0 });
+      
+      // 약간 지연 후 스크롤 위치 다시 설정 (Vercel 배포 환경에서 더 안정적으로 작동하도록)
+      setTimeout(() => {
+        if (scrollContainerRef?.current) {
+          scrollContainerRef.current.scrollTo({ top: 0 });
+        }
+      }, 100);
+    }
+  }, []);
+
+  useEffect(() => {
     const current = photos.find((p) => {
       const facingX = p.side === "left" ? p.x + 3 : p.x - 1;
       const matchX = position.x === facingX;
@@ -138,6 +157,27 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
   }, [position]);
 
   const currentPhoto = photos.find((p) => p.id === activePhotoId);
+
+  // 컴포넌트 렌더링 직후 스크롤 위치 강제 초기화
+  useEffect(() => {
+    if (scrollContainerRef?.current) {
+      // 여러 번 반복해서 스크롤 위치를 초기화 (Vercel 환경에서의 안정성을 위해)
+      const resetScroll = () => {
+        if (scrollContainerRef?.current) {
+          scrollContainerRef.current.scrollTop = 0;
+          scrollContainerRef.current.scrollTo({ top: 0, behavior: 'auto' });
+        }
+      };
+      
+      // 즉시 실행
+      resetScroll();
+      
+      // 여러 시간 간격으로 초기화 시도
+      setTimeout(resetScroll, 50);
+      setTimeout(resetScroll, 150);
+      setTimeout(resetScroll, 300);
+    }
+  }, []);
 
   return (
     <div

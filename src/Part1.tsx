@@ -138,24 +138,23 @@ export default function Part1() {
       
       {/* 깜빡이는 삼각형 화살표 버튼 */}
       <div 
-        className="absolute bottom-24 left-1/2 transform -translate-x-1/2"
+        className="absolute left-1/2 transform -translate-x-1/2"
         style={{ 
           animation: "pulse 1.5s infinite ease-in-out",
-          transition: "color 0.5s ease-in-out"
+          transition: "color 0.5s ease-in-out",
+          zIndex: 10,
+          top: "calc(50% + 120px)" // 화면 중앙에서 아래로 50px 위치시킴 (흰색 박스 바로 아래)
         }}
       >
         <svg 
           xmlns="http://www.w3.org/2000/svg" 
-          width="36" 
-          height="36" 
+          width="30" 
+          height="30" 
           viewBox="0 0 24 24" 
           fill={arrowColors[arrowColorIndex]} 
-          stroke={arrowColors[arrowColorIndex]} 
-          strokeWidth="2" 
-          strokeLinecap="round" 
-          strokeLinejoin="round"
+          stroke="none"
         >
-          <path d="M6 9l6 6 6-6"/>
+          <polygon points="2,8 12,20 22,8" />
         </svg>
       </div>
     </div>

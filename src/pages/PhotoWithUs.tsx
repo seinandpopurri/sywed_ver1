@@ -243,7 +243,6 @@ const PhotoWithUs: React.FC<PhotoWithUsProps> = ({ onBack }) => {
         const file = new File([blob], "sy_wed_.jpg", { type: "image/jpeg" });
         navigator.share({
           files: [file],
-          title: '🤍',
         }).catch(err => {
           console.error('공유 오류:', err);
         });

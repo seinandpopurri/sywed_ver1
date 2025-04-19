@@ -75,6 +75,37 @@ export default function App() {
     };
   }, [currentPage]);
 
+  useEffect(() => {
+    const ref = scrollRef.current;
+    
+    // 현재 페이지가 갤러리일 때 방향 패드 표시
+    setShowDirectionPad(currentPage === "gallery");
+    
+    if (ref && (currentPage === "home" || currentPage === "menu")) {
+      ref.addEventListener("scroll", handleScroll);
+    }
+    
+    // 갤러리, 사진, 가족, 방명록 페이지일 때만 스크롤 위치를 초기화
+    // 홈과 메뉴 페이지 사이에는 스크롤을 자유롭게 허용
+    if (ref && currentPage !== "home" && currentPage !== "menu") {
+      // 즉시 스크롤 초기화
+      ref.scrollTo({ top: 0 });
+      
+      // Vercel 배포 환경에서의 안정성을 위해 지연 후 한번 더 초기화
+      setTimeout(() => {
+        if (ref) {
+          ref.scrollTo({ top: 0 });
+        }
+      }, 100);
+    }
+    
+    return () => {
+      if (ref) {
+        ref.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [currentPage]);
+
   // 메뉴 페이지로 이동하는 함수
   const goToMenu = () => {
     sectionRefs.current.menu?.scrollIntoView({ behavior: 'smooth' });
@@ -87,6 +118,19 @@ export default function App() {
     const ref = scrollRef.current;
     if (ref) {
       ref.removeEventListener("scroll", handleScroll);
+      
+      // home과 menu가 아닌 서브페이지로 이동할 때만 스크롤 초기화
+      if (page !== "home" && page !== "menu") {
+        // 스크롤 위치를 맨 위로 초기화
+        ref.scrollTo({ top: 0 });
+        
+        // 약간의 지연 후 스크롤 위치를 다시 확인하고 초기화 (Vercel 환경 대응)
+        setTimeout(() => {
+          if (ref) {
+            ref.scrollTo({ top: 0 });
+          }
+        }, 100);
+      }
     }
     
     // 페이지 상태 업데이트

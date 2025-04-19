@@ -58,7 +58,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
         className="absolute z-10"
         style={{ 
           left: '7%',
-          top: '16%',
+          top: '18%',
           width: '30%'
         }}
       />
@@ -88,7 +88,7 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
       <div className="relative z-20 w-full h-full flex flex-col items-center justify-center overflow-hidden">
         {/* 안내 메시지 - 상단 배치 */}
         {showGuide && (
-          <div className="absolute top-20 left-0 right-0 z-30 flex justify-center">
+          <div className="absolute top-16 left-0 right-0 z-30 flex justify-center">
             <div className="bg-white/80 backdrop-blur-sm px-4 py-3 rounded-lg shadow-md text-center">
               <p className="text-sm font-regular text-gray-800 leading-tight">이름을 눌러서 정보를 확인하세요.</p>
               <p className="text-sm font-regular text-gray-800 leading-tight mt-0.5">화환은 정중히 사양합니다.</p>
