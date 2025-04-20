@@ -36,7 +36,7 @@ const photos = [
   { id: "right-3", side: "right", x: 7, y: 18, message: "상견례 끝나고 여수에서", imagePath: "/gallery/right_04.jpg" },
   { id: "right-4", side: "right", x: 7, y: 23, message: "도쿄 도착", imagePath: "/gallery/right_05.jpg" },
   { id: "right-5", side: "right", x: 7, y: 28, message: "비싼 옷", imagePath: "/gallery/right_06.jpg" },
-  { id: "right-6", side: "right", x: 7, y: 33, message: "출근길", imagePath: "/gallery/right_07.jpg" },
+  { id: "right-6", side: "right", x: 7, y: 33, message: "힘겨운 출근길", imagePath: "/gallery/right_07.jpg" },
   { id: "right-7", side: "right", x: 7, y: 38, message: "뱅쇼 파티", imagePath: "/gallery/right_08.jpg" },
   { id: "right-8", side: "right", x: 7, y: 43, message: "여수 여행", imagePath: "/gallery/right_09.jpg" },
   { id: "right-9", side: "right", x: 7, y: 48, message: "한라산 with 희애충근소이", imagePath: "/gallery/right_10.jpg" },
