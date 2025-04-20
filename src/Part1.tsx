@@ -4,6 +4,9 @@ export default function Part1() {
   const [firstLine, setFirstLine] = useState("");
   const [fontSize, setFontSize] = useState("min(8vw, 38px)");
   const [arrowColorIndex, setArrowColorIndex] = useState(0);
+  const [hoverSein, setHoverSein] = useState(false);
+  const [hoverYellogg, setHoverYellogg] = useState(false);
+  const [hoverAmanti, setHoverAmanti] = useState(false);
   
   // 웹사이트에서 사용한 색상 배열
   const arrowColors = ['#8ACBD9', '#F7CD48', '#6DC140', '#D8A423']; 
@@ -40,6 +43,101 @@ export default function Part1() {
     return () => window.removeEventListener('resize', handleResize);
   }, []); // 컴포넌트 마운트 시 한 번만 실행
 
+  // 링크를 위한 기본 스타일
+  const linkStyle = {
+    color: 'inherit',
+    textDecoration: 'none',
+    transition: 'color 0.3s ease'
+  };
+
+  // 호버 상태에 따른 스타일
+  const seinStyle = {
+    ...linkStyle,
+    color: hoverSein ? '#FF80D2' : 'inherit'
+  };
+
+  const yellowggStyle = {
+    ...linkStyle,
+    color: hoverYellogg ? '#FF80D2' : 'inherit'
+  };
+
+  const amantiStyle = {
+    ...linkStyle,
+    color: hoverAmanti ? '#6DC140' : 'inherit'
+  };
+
+  // 링크 클릭 핸들러 - 이벤트 전파 중지
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 버블링 중지
+    // 클릭 시 모든 호버 상태 초기화
+    setHoverSein(false);
+    setHoverYellogg(false);
+    setHoverAmanti(false);
+  };
+
+  // 이름 렌더링 함수
+  const renderNameLine = () => {
+    if (firstLine === "홍세인과 이영건의") {
+      return (
+        <>
+          <a 
+            href="http://instagram.com/seinandpopurri" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={seinStyle}
+            onMouseEnter={() => setHoverSein(true)}
+            onMouseLeave={() => setHoverSein(false)}
+            onClick={handleLinkClick}
+          >
+            홍세인
+          </a>
+          과{" "}
+          <a 
+            href="http://instagram.com/misiio.here" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={yellowggStyle}
+            onMouseEnter={() => setHoverYellogg(true)}
+            onMouseLeave={() => setHoverYellogg(false)}
+            onClick={handleLinkClick}
+          >
+            이영건
+          </a>
+          의
+        </>
+      );
+    } else {
+      return (
+        <>
+          <a 
+            href="http://instagram.com/misiio.here" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={yellowggStyle}
+            onMouseEnter={() => setHoverYellogg(true)}
+            onMouseLeave={() => setHoverYellogg(false)}
+            onClick={handleLinkClick}
+          >
+            이영건
+          </a>
+          과{" "}
+          <a 
+            href="http://instagram.com/seinandpopurri" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            style={seinStyle}
+            onMouseEnter={() => setHoverSein(true)}
+            onMouseLeave={() => setHoverSein(false)}
+            onClick={handleLinkClick}
+          >
+            홍세인
+          </a>
+          의
+        </>
+      );
+    }
+  };
+
   return (
     <div 
       className="h-full w-full relative flex flex-col justify-center items-center"
@@ -69,7 +167,7 @@ export default function Part1() {
               whiteSpace: "nowrap" // 줄바꿈 방지
             }}
           >
-            {firstLine}
+            {renderNameLine()}
           </p>
 
           {/* 두 번째 줄: 결혼식에 초대합니다 */}
@@ -125,10 +223,10 @@ export default function Part1() {
               href="https://map.naver.com/v5/search/아만티%20호텔%20서울" 
               target="_blank" 
               rel="noopener noreferrer"
-              style={{ 
-                color: "#FF80D2",
-                textDecoration: "none"
-              }}
+              style={amantiStyle}
+              onMouseEnter={() => setHoverAmanti(true)}
+              onMouseLeave={() => setHoverAmanti(false)}
+              onClick={handleLinkClick}
             >
               아만티 호텔 서울
             </a>

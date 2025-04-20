@@ -173,6 +173,11 @@ export default function App() {
     }
   };
 
+  // 링크 클릭 핸들러 - 이벤트 전파 중지
+  const handleLinkClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // 이벤트 버블링 중지
+  };
+
   // 현재 페이지에 따라 렌더링할 컴포넌트 결정
   const renderPage = () => {
     switch (currentPage) {
@@ -346,11 +351,36 @@ export default function App() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#FF80D2] transition-colors duration-200"
+                onClick={handleLinkClick}
+                style={{ color: 'inherit', textDecoration: 'none' }}
               >
                 아만티 호텔 서울
               </a>
             </p>
-            <p className="text-xs mx-auto">홍세인과 이영건의 결혼식에 초대합니다.</p>
+            <p className="text-xs mx-auto">
+              <a
+                href="http://instagram.com/seinandpopurri"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF80D2] transition-colors duration-200"
+                onClick={handleLinkClick}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+              >
+                홍세인
+              </a>
+              과{" "}
+              <a
+                href="http://instagram.com/misiio.here"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#FF80D2] transition-colors duration-200"
+                onClick={handleLinkClick}
+                style={{ color: 'inherit', textDecoration: 'none' }}
+              >
+                이영건
+              </a>
+              의 결혼식에 초대합니다.
+            </p>
           </div>
         )}
 
