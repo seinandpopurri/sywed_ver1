@@ -401,7 +401,7 @@ const PhotoWithUs: React.FC<PhotoWithUsProps> = ({ onBack }) => {
     // 타임아웃 설정
     const uploadTimeout = setTimeout(() => {
       console.error("업로드 타임아웃 발생");
-      showErrorPopup("업로드 시간이 초과되었습니다. 다시 시도해주세요.");
+      showErrorPopup("업로드 시간이 초과되었습니다. <br />다시 시도해주세요.<br />계속 오류가 뜬다면<br />다른 브라우저를 이용하세요.");
       setIsUploading(false);
       setIsSavingPhoto(false);
     }, 30000); // 30초 타임아웃
