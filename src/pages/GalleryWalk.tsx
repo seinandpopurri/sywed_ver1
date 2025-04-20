@@ -15,7 +15,7 @@ const PHOTO_HEIGHT = 4;
 const EXTRA_BOTTOM_SPACE = 6; // 마지막 사진 아래 여백 확장
 
 const photos = [
-  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "술 많이 마신 날", imagePath: "/gallery/left_01.jpg" },
+  { id: "left-0", side: "left", x: 1, y: FIRST_PHOTO_Y, message: "한강", imagePath: "/gallery/left_01.jpg" },
   { id: "left-1", side: "left", x: 1, y: 8, message: "재범 결혼식에서", imagePath: "/gallery/left_02.jpg" },
   { id: "left-2", side: "left", x: 1, y: 13, message: "처음으로 둘이 놀았던", imagePath: "/gallery/left_03.jpg" },
   { id: "left-3", side: "left", x: 1, y: 18, message: "두부집 지하", imagePath: "/gallery/left_04.jpg" },
@@ -31,8 +31,8 @@ const photos = [
   { id: "left-13", side: "left", x: 1, y: 68, message: "사귈 줄 알았던 날", imagePath: "/gallery/left_14.jpg" },
   { id: "left-14", side: "left", x: 1, y: LAST_PHOTO_Y, message: "눈부셔", imagePath: "/gallery/left_15.jpg" },
   { id: "right-0", side: "right", x: 7, y: FIRST_PHOTO_Y, message: "21_21 DESIGN SITE", imagePath: "/gallery/right_01.jpg" },
-  { id: "right-1", side: "right", x: 7, y: 8, message: "한강에서", imagePath: "/gallery/right_02.jpg" },
-  { id: "right-2", side: "right", x: 7, y: 13, message: "강아지는 못들어와서", imagePath: "/gallery/right_03.jpg" },
+  { id: "right-1", side: "right", x: 7, y: 8, message: "강아지는 못들어와서", imagePath: "/gallery/right_02.jpg" },
+  { id: "right-2", side: "right", x: 7, y: 13, message: "독주 with 진영", imagePath: "/gallery/right_03.jpg" },
   { id: "right-3", side: "right", x: 7, y: 18, message: "상견례 끝나고 여수에서", imagePath: "/gallery/right_04.jpg" },
   { id: "right-4", side: "right", x: 7, y: 23, message: "도쿄 도착", imagePath: "/gallery/right_05.jpg" },
   { id: "right-5", side: "right", x: 7, y: 28, message: "비싼 옷", imagePath: "/gallery/right_06.jpg" },
@@ -40,7 +40,7 @@ const photos = [
   { id: "right-7", side: "right", x: 7, y: 38, message: "뱅쇼 파티", imagePath: "/gallery/right_08.jpg" },
   { id: "right-8", side: "right", x: 7, y: 43, message: "여수 여행", imagePath: "/gallery/right_09.jpg" },
   { id: "right-9", side: "right", x: 7, y: 48, message: "한라산 with 희애충근소이", imagePath: "/gallery/right_10.jpg" },
-  { id: "right-10", side: "right", x: 7, y: 53, message: "취함", imagePath: "/gallery/right_11.jpg" },
+  { id: "right-10", side: "right", x: 7, y: 53, message: "엄청 큰 가방", imagePath: "/gallery/right_11.jpg" },
   { id: "right-11", side: "right", x: 7, y: 58, message: "엘리베이터", imagePath: "/gallery/right_12.jpg" },
   { id: "right-12", side: "right", x: 7, y: 63, message: "장난감 총을 주웠다", imagePath: "/gallery/right_13.jpg" },
   { id: "right-13", side: "right", x: 7, y: 68, message: "진지한 이야기 중", imagePath: "/gallery/right_14.jpg" },
