@@ -26,9 +26,9 @@ const FamilyTree: React.FC<FamilyTreeProps> = ({ onBack }) => {
     { id: "leeyounggun", name: "이영건", relation: "양경희, 이정길의 아들\n이은지의 동생", phone: "010-5104-9962", bankAccount: "110-274-870261 신한" },
     { id: "kimsieun", name: "김시은", relation: "홍세인, 홍세영의 엄마", phone: "010-9209-4919", bankAccount: "352-1887-6759-73 농협" },
     { id: "hongseongmyun", name: "홍성면", relation: "홍세인, 홍세영의 아빠", phone: "010-9749-0030", bankAccount: "100-135-020298 케이뱅크" },
-    { id: "hongsein", name: "홍세인", relation: "김시은, 홍성면의 딸\n홍세영의 언니", phone: "010-6470-8811", bankAccount: "100-190-830082 케이뱅크" },
-    { id: "hongseeyoung", name: "홍세영", relation: "김시은, 홍성면의 딸\n홍세인의 동생", isChild: true },
-    { id: "mire", name: "밀레", relation: "홍세인, 이영건의 반려견", isChild: true },
+    { id: "hongsein", name: "홍세인", relation: "김시은, 홍성면의 딸\n홍세영의 언니\n밀레, 칸트의 누나", phone: "010-6470-8811", bankAccount: "100-190-830082 케이뱅크" },
+    { id: "hongseeyoung", name: "홍세영", relation: "김시은, 홍성면의 딸\n홍세인의 동생\n밀레, 칸트의 누나", isChild: true },
+    { id: "mire", name: "밀레", relation: "홍세인, 이영건의 가족", isChild: true },
   ];
 
   // 팝업 닫기 핸들러
