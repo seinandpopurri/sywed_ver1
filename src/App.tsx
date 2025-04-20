@@ -257,7 +257,7 @@ export default function App() {
             height: "140px",
             left: "50%",
             transform: "translateX(-50%)",
-            bottom: "8%", // 인앱 브라우저 여부와 관계없이 8%로 통일
+            bottom: isInAppBrowser ? "8%" : "18%", // 인앱 브라우저에서는 8%, 일반 브라우저에서는 18%
             paddingBottom: "env(safe-area-inset-bottom, 0px)"
           }}
         >
