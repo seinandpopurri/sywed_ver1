@@ -57,8 +57,62 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
   const [showHint, setShowHint] = useState(false);
   const [activePhotoId, setActivePhotoId] = useState<string | null>(null);
   const [popupPhotoId, setPopupPhotoId] = useState<string | null>(null);
+  const [heartColorIndex, setHeartColorIndex] = useState(0);
   const characterRef = useRef<HTMLDivElement>(null);
   const hasMounted = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout[]>([]);
+  
+  // 웹사이트에서 사용한 색상 배열 - 배경색(#FF80D2) 제외
+  const heartColors = ['#8ACBD9', '#F7CD48', '#6DC140', '#D8A423']; 
+  
+  // 컴포넌트 언마운트 시 모든 타이머 정리
+  useEffect(() => {
+    return () => {
+      scrollTimeoutRef.current.forEach(clearTimeout);
+    };
+  }, []);
+  
+  // 하트 색상을 주기적으로 변경하는 효과
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setHeartColorIndex((prevIndex) => (prevIndex + 1) % heartColors.length);
+    }, 300); // 300ms 마다 색상 변경
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  // 컴포넌트 마운트 시 힌트 표시 및 스크롤 초기화
+  useEffect(() => {
+    // 컴포넌트 마운트 시 힌트 표시
+    setShowHint(true);
+    
+    // 스크롤 위치를 상단으로 강제 재설정
+    if (scrollContainerRef?.current) {
+      const resetScroll = () => {
+        if (scrollContainerRef?.current) {
+          scrollContainerRef.current.scrollTop = 0;
+        }
+      };
+
+      // 즉시 실행
+      resetScroll();
+      
+      // 여러 시간 간격으로 초기화 시도 (타이밍 이슈 해결을 위해)
+      const timeouts = [
+        setTimeout(resetScroll, 0),
+        setTimeout(resetScroll, 50),
+        setTimeout(resetScroll, 100),
+        setTimeout(resetScroll, 200),
+        setTimeout(resetScroll, 500),
+        setTimeout(resetScroll, 1000)
+      ];
+      
+      scrollTimeoutRef.current = timeouts;
+    }
+    
+    // 초기 위치 재설정
+    setPosition({ x: 5, y: 3 });
+  }, []);
 
   const move = (dir: "up" | "down" | "left" | "right") => {
     // 방향키를 움직이면 힌트 메시지를 숨김
@@ -129,31 +183,6 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
   }, [position]);
 
   useEffect(() => {
-    // 컴포넌트 마운트 시 힌트 표시
-    setShowHint(true);
-    // 타임아웃 제거 - 방향키를 누를 때까지 계속 표시
-  }, []);
-
-  useEffect(() => {
-    // 컴포넌트 마운트 시 힌트 표시
-    setShowHint(true);
-    // 타임아웃 제거 - 방향키를 누를 때까지 계속 표시
-    
-    // 컴포넌트 마운트 시 스크롤 위치를 맨 위로 설정
-    if (scrollContainerRef?.current) {
-      // 즉시 실행 및 약간의 지연 후 한번 더 실행 (안정성을 위해)
-      scrollContainerRef.current.scrollTo({ top: 0 });
-      
-      // 약간 지연 후 스크롤 위치 다시 설정 (Vercel 배포 환경에서 더 안정적으로 작동하도록)
-      setTimeout(() => {
-        if (scrollContainerRef?.current) {
-          scrollContainerRef.current.scrollTo({ top: 0 });
-        }
-      }, 100);
-    }
-  }, []);
-
-  useEffect(() => {
     const current = photos.find((p) => {
       const facingX = p.side === "left" ? p.x + 3 : p.x - 1;
       const matchX = position.x === facingX;
@@ -167,27 +196,6 @@ const GalleryWalk: React.FC<GalleryWalkProps> = ({ scrollContainerRef, onBack })
   }, [position]);
 
   const currentPhoto = photos.find((p) => p.id === activePhotoId);
-
-  // 컴포넌트 렌더링 직후 스크롤 위치 강제 초기화
-  useEffect(() => {
-    if (scrollContainerRef?.current) {
-      // 여러 번 반복해서 스크롤 위치를 초기화 (Vercel 환경에서의 안정성을 위해)
-      const resetScroll = () => {
-        if (scrollContainerRef?.current) {
-          scrollContainerRef.current.scrollTop = 0;
-          scrollContainerRef.current.scrollTo({ top: 0, behavior: 'auto' });
-        }
-      };
-      
-      // 즉시 실행
-      resetScroll();
-      
-      // 여러 시간 간격으로 초기화 시도
-      setTimeout(resetScroll, 50);
-      setTimeout(resetScroll, 150);
-      setTimeout(resetScroll, 300);
-    }
-  }, []);
 
   return (
     <div

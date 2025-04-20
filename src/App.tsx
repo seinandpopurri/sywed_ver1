@@ -196,7 +196,7 @@ export default function App() {
           </>
         );
       case "gallery":
-        return <GalleryWalk onBack={goBackToMenu} scrollContainerRef={scrollRef} />;
+        return <GalleryWalk key="gallery-walk" onBack={goBackToMenu} scrollContainerRef={scrollRef} />;
       case "photo":
         return <PhotoWithUs onBack={goBackToMenu} />;
       case "family":

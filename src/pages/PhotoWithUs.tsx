@@ -299,7 +299,7 @@ const PhotoWithUs: React.FC<PhotoWithUsProps> = ({ onBack }) => {
                 onClick={isIOS && typeof navigator.share === 'function' ? sharePhoto : savePhoto}
                 className="flex-1 py-2 bg-[#FF80D2] text-white rounded-none font-medium"
               >
-                {isIOS && typeof navigator.share === 'function' ? '공유하기' : '저장하기'}
+                {isIOS && typeof navigator.share === 'function' ? '저장하기' : '저장하기'}
               </button>
             </div>
           </div>
