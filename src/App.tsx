@@ -20,6 +20,11 @@ export default function App() {
     home: null,
     menu: null
   });
+  const [initialOffset, setInitialOffset] = useState({x: 0, y: 0}); 
+  const [isMoving, setIsMoving] = useState(false);
+  const [moveDirection, setMoveDirection] = useState<string | null>(null);
+  const requestRef = useRef<number | null>(null);
+  const [isInAppBrowser, setIsInAppBrowser] = useState(false);
 
   useEffect(() => {
     // 페이지 로드 시 맨 위로 스크롤 (최초 로드시에만 실행)
@@ -178,6 +183,37 @@ export default function App() {
     e.stopPropagation(); // 이벤트 버블링 중지
   };
 
+  // 브라우저 환경 감지
+  useEffect(() => {
+    const userAgent = window.navigator.userAgent.toLowerCase();
+    
+    // 인스타그램과 카카오톡 내부 브라우저 감지
+    const isInstagram = userAgent.includes('instagram');
+    const isKakao = userAgent.includes('kakao') || 
+                   userAgent.includes('kakaotalk') || 
+                   userAgent.includes('naver') ||
+                   /\bkakao\b/.test(userAgent);
+    
+    // 추가적인 인앱 브라우저 감지
+    const isFacebook = userAgent.includes('fban') || userAgent.includes('fbav');
+    const isLine = userAgent.includes('line');
+    const isAndroidWebView = userAgent.includes('wv') || 
+                            (userAgent.includes('android') && !userAgent.includes('chrome'));
+    
+    const isInApp = isInstagram || isKakao || isFacebook || isLine || isAndroidWebView || 
+                   (!userAgent.includes('safari') && userAgent.includes('mobile'));
+    
+    setIsInAppBrowser(isInApp);
+    
+    console.log('App - 브라우저 환경:', { 
+      userAgent, 
+      isKakao,
+      hasKakaoText: userAgent.includes('kakao'),
+      isInstagram,
+      isInApp
+    });
+  }, []);
+
   // 현재 페이지에 따라 렌더링할 컴포넌트 결정
   const renderPage = () => {
     switch (currentPage) {
@@ -215,12 +251,13 @@ export default function App() {
     <div className="w-screen h-screen bg-[#F7F7F7] flex justify-center items-center relative">
       {showDirectionPad && (
         <div
-          className="absolute z-[100] bottom-[18%] lg:bottom-[8%]"
+          className="absolute z-[100]"
           style={{
             width: "140px",
             height: "140px",
             left: "50%",
             transform: "translateX(-50%)",
+            bottom: isInAppBrowser ? "8%" : "18%", // 인앱 브라우저에서는 훨씬 더 아래쪽에 배치
             paddingBottom: "env(safe-area-inset-bottom, 0px)"
           }}
         >
