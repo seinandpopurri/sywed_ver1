@@ -212,8 +212,8 @@ export default function App() {
         <div
           className="absolute z-[100] bottom-[18%] lg:bottom-[8%]"
           style={{
-            width: "130px",
-            height: "130px",
+            width: "140px",
+            height: "140px",
             left: "50%",
             transform: "translateX(-50%)",
             paddingBottom: "env(safe-area-inset-bottom, 0px)"
@@ -275,8 +275,8 @@ export default function App() {
                 tabIndex={-1}
                 style={{
                   position: "absolute",
-                  width: "36px",
-                  height: "36px",
+                  width: "42px",
+                  height: "42px",
                   backgroundColor: "#f1f1f1",
                   display: "flex",
                   alignItems: "center",
