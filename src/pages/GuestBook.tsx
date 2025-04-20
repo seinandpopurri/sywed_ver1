@@ -175,7 +175,7 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
   };
   
   return (
-    <div className="relative w-full h-full flex flex-col items-center bg-[#FF80D2] py-16 px-4">
+    <div className="relative w-full min-h-screen flex flex-col items-center bg-[#FF80D2] py-16 px-4">
       {/* 뒤로 가기 버튼 */}  
       <button 
         onClick={onBack}
@@ -237,7 +237,7 @@ const GuestBook: React.FC<GuestBookProps> = ({ onBack }) => {
       </form>
       
       {/* 메시지 목록 */}
-      <div className="w-full max-w-md">
+      <div className="w-full max-w-md flex-1 pb-8">
         <div className="divide-y divide-gray-800">
           {messages.map((msg) => (
             <div key={msg.id} className="py-2 flex items-start">
